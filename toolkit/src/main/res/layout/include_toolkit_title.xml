@@ -60,6 +60,17 @@
         tools:ignore="ContentDescription"
         tools:src="@drawable/toolkit_clear" />
 
+    <ImageView
+        android:id="@+id/iv_toolSearch"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        app:layout_constraintRight_toLeftOf="@+id/iv_toolRight"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        android:visibility="gone"
+        tools:src="@drawable/toolkit_search" />
+
     <View
         android:id="@+id/view_toolLine"
         android:layout_width="match_parent"

@@ -24,8 +24,8 @@
     <string name="tool_title_previous">Previous</string>
     <string name="tool_title_clear">Clear</string>
     <string name="tool_title_share">Share</string>
-    <string name="tool_title_record_list">Record List</string>
-    <string name="tool_title_record_detail">Record Detail</string>
+    <string name="tool_title_record_list">请求列表</string>
+    <string name="tool_title_record_detail">请求详情</string>
     <string name="tool_title_crash_detail">Crash Detail</string>
     <string name="loading">Loading, please wait…</string>
     <string name="loading_more">Loading more, please wait…</string>

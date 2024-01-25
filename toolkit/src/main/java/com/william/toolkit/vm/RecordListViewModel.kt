@@ -16,11 +16,16 @@
 
 package com.william.toolkit.vm
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.william.toolkit.base.BaseViewModel
+import com.william.toolkit.bean.ApiRecordBean
 import com.william.toolkit.ext.launch
 import com.william.toolkit.manager.DataManager
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.take
 
 
 /**
@@ -41,5 +46,10 @@ class RecordListViewModel : BaseViewModel() {
             clearFlag.value = it
         })
     }
+
+    fun searchListData(key:String): LiveData<List<ApiRecordBean>> {
+        return DataManager.searchRecordList(key).asLiveData();
+    }
+
 
 }

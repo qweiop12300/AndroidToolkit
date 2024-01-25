@@ -106,6 +106,10 @@ object DataManager {
         return dao.queryLimitRecord(index)
     }
 
+    internal fun searchRecordList(key: String): Flow<List<ApiRecordBean>> {
+        return dao.searchRecord(key)
+    }
+
     /**
      * 清除数据表
      */

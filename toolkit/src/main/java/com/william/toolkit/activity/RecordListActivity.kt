@@ -16,7 +16,10 @@
 
 package com.william.toolkit.activity
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.william.toolkit.R
@@ -28,6 +31,8 @@ import com.william.toolkit.bean.ApiRecordBean
 import com.william.toolkit.databinding.ActivityToolkitRecordListBinding
 import com.william.toolkit.util.openActivity
 import com.william.toolkit.vm.RecordListViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.take
 
 /**
  * @author William
@@ -55,12 +60,41 @@ class RecordListActivity : BaseActivity() {
     private fun initView() {
         mViewBinding.includeTitle.apply {
             ivPrevious.setOnClickListener { onBackPressed() }
+            ivToolSearch.isVisible = true;
+            ivToolSearch.setImageResource(R.drawable.toolkit_search)
+            ivToolSearch.setOnClickListener{showInputDialog()}
             tvToolTitle.setText(R.string.tool_title_record_list)
             ivToolRight.setImageResource(R.drawable.toolkit_clear)
             ivToolRight.setOnClickListener {
                 viewModel.clearRecord()
             }
         }
+    }
+
+    fun showInputDialog() {
+        val inputEditText = EditText(this)
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("搜索")
+            .setView(inputEditText)
+            .setPositiveButton("搜索") { _, _ ->
+                val userInput = inputEditText.text.toString()
+                search(userInput)
+            }
+            .setNegativeButton("取消") { dialog, _ ->
+                dialog.cancel()
+            }
+            .create()
+
+        dialog.show()
+    }
+
+    fun search(key:String){
+        viewModel.searchListData(key).observe(this@RecordListActivity,{
+            dismissLoading()
+            mAdapter?.setList(it)
+            mViewBinding.tvEmptyData.isVisible = it.isEmpty()
+        });
     }
 
     private fun initData() {

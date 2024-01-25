@@ -18,28 +18,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
-    id 'maven-publish'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.cbl.android'
-                artifactId = 'toolkit'
-                version = '1.0.7'
-            }
-        }
-
-        repositories {
-            maven {
-                allowInsecureProtocol true
-                name = "cbl" //可选
-                url = "file://d://Project//maven//Android"
-            }
-        }
-    }
 }
 
 

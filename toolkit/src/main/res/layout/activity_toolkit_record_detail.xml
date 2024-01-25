@@ -38,7 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/tool_color_232323"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textIsSelectable="true"/>
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

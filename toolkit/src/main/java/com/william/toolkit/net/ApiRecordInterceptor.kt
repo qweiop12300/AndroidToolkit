@@ -16,6 +16,9 @@
 
 package com.william.toolkit.net
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
 import com.william.toolkit.ToolkitPanel
 import com.william.toolkit.bean.ApiRecordBean
 import com.william.toolkit.manager.DataManager
@@ -28,6 +31,7 @@ import org.json.JSONObject
 import java.io.IOException
 import java.lang.Exception
 import java.nio.charset.Charset
+import java.util.Base64
 import java.util.concurrent.TimeUnit
 
 
@@ -63,6 +67,7 @@ class ApiRecordInterceptor constructor(callBack: DecryptCallBack) : Interceptor 
         return response!!
     }
 
+
     @Throws(IOException::class)
     private fun collectApiRecordData(
         request: Request,
@@ -90,16 +95,13 @@ class ApiRecordInterceptor constructor(callBack: DecryptCallBack) : Interceptor 
                 if (responseBody?.length!! >= 524288){
                     responseBody = "内容大于2MB不显示";
                 }
-                try {
-                    val responseJson = JSONObject(responseBody);
-                    responseJson.getJSONObject("data")
-                }catch (e:Exception){
-                    try {
-                        responseBody = call.decrypt(responseBody)
-                    }catch (e2:Exception){
-                        e2.printStackTrace()
-                    }
-                }
+            }
+
+            try {
+                requestBody = call.requestBodyDecrypt(requestBody)
+                responseBody = call.responseBodyDecrypt(responseBody)
+            }catch (e:Exception){
+                e.printStackTrace()
             }
 
             val headers = request.headers()

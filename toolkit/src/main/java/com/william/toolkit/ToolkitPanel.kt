@@ -138,11 +138,13 @@ object ToolkitPanel {
     private class FloatingTouchListener : OnTouchListener {
         private var x = 0
         private var y = 0
+        private var hasMoved = false;
 
         @SuppressLint("ClickableViewAccessibility")
         override fun onTouch(view: View, event: MotionEvent): Boolean {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
+                    hasMoved = false;
                     x = event.rawX.toInt()
                     y = event.rawY.toInt()
                 }
@@ -156,6 +158,13 @@ object ToolkitPanel {
                     windowParams?.x = windowParams?.x?.plus(movedX)
                     windowParams?.y = windowParams?.y?.plus(movedY)
                     windowManager?.updateViewLayout(view, windowParams)
+
+                    if(Math.abs(movedX) > 5 || Math.abs(movedY) > 5) {
+                        hasMoved = true;
+                    }
+                }
+                MotionEvent.ACTION_UP->{
+                    return hasMoved
                 }
                 else -> {
                 }
