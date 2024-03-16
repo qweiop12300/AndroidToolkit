@@ -29,7 +29,25 @@
         android:text="✅"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/tv_tool_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="标题"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:maxLines="1"
+        app:layout_constraintLeft_toRightOf="@+id/tv_tool_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        >
+    </TextView>
 
     <TextView
         android:id="@+id/tv_tool_url"
@@ -39,9 +57,10 @@
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:maxLines="3"
+        android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@+id/tv_tool_icon"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tool_title"
         tools:text="Url: https://developer.android.com/" />
 
     <TextView

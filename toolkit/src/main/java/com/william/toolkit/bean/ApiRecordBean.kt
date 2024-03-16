@@ -35,6 +35,7 @@ import kotlinx.parcelize.Parcelize
 data class ApiRecordBean(
     var url: String? = null,
     var method: String? = null,
+    var title:String? = null,
     var headers: String? = null,
     var request: String? = null,
     var response: String? = null,
@@ -49,7 +50,10 @@ data class ApiRecordBean(
     var id: Long = 0
 
     override fun toString(): String {
-        return """${TITLE_ARRAY[0]} : $url
+        return """
+${TITLE_ARRAY[10]} : $title
+
+${TITLE_ARRAY[0]} : $url
 
 ${TITLE_ARRAY[1]} : $id
 
@@ -68,6 +72,7 @@ ${TITLE_ARRAY[7]} : ${format(request)}
 ${TITLE_ARRAY[8]} : ${format(response)}
 
 ${TITLE_ARRAY[9]} : $errorMsg
+
 """
     }
 
@@ -85,7 +90,8 @@ ${TITLE_ARRAY[9]} : $errorMsg
                 "Headers",
                 "RequestBody",
                 "ResponseBody",
-                "ErrorMessage"
+                "ErrorMessage",
+                "Title",
             )
 
     }

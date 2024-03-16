@@ -19,11 +19,13 @@ package com.william.toolkit
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.PixelFormat
 import android.os.Build
 import android.provider.Settings
 import android.view.*
 import android.view.View.OnTouchListener
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -61,6 +63,7 @@ object ToolkitPanel {
         get() = ActStackManager.activityCount > 0
 
     var isDebugMode: Boolean = BuildConfig.DEBUG
+    var bmp:Bitmap?=null
 
     init {
         windowParams = WindowManager.LayoutParams().apply {
@@ -85,6 +88,8 @@ object ToolkitPanel {
     fun init(context: Application, config: ToolkitConfig) {
         appContext = context
         isDebugMode = config.debugMode
+        bmp = config.bmp
+
         context.registerActivityLifecycleCallbacks(ActLifeCircleCallback())
         ProcessLifecycleOwner.get().lifecycle.addObserver(ApplicationObserver())
         EmojiConfigHelper.initEmojiCompat()
@@ -107,8 +112,14 @@ object ToolkitPanel {
         if (windowManager == null) {
             windowManager = appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         }
+
         displayView =
             LayoutInflater.from(appContext).inflate(R.layout.floating_toolkit, null)
+
+        if (bmp!=null){
+            displayView?.findViewById<ImageView>(R.id.toolkit_floating)?.setImageBitmap(bmp)
+        }
+
         displayView?.apply {
             setOnTouchListener(FloatingTouchListener())
             setOnClickListener {

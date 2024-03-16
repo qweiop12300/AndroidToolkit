@@ -53,7 +53,7 @@ interface RecordDao {
 //    @Query("select * from ApiRecordBean where requestTime > :lastTime limit :rows")
     fun queryLimitRecord(startId: Long = 0, rows: Int = 10000): Flow<List<ApiRecordBean>>
 
-    @Query("select * from ApiRecordBean where url like '%'||:param||'%' order by requestTime")
+    @Query("select * from ApiRecordBean where url like '%'||:param||'%' or title like '%'||:param||'%' or request like '%'||:param||'%' or response like '%'||:param||'%' order by requestTime")
     fun searchRecord(param:String):Flow<List<ApiRecordBean>>
 
     @Query("select count(id) from ApiRecordBean")

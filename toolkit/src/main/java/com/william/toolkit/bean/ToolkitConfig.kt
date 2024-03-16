@@ -16,6 +16,7 @@
 
 package com.william.toolkit.bean
 
+import android.graphics.Bitmap
 import com.william.toolkit.BuildConfig
 
 /**
@@ -29,11 +30,15 @@ class ToolkitConfig(builder: Builder) {
      * 调试模式
      */
     var debugMode: Boolean = builder.debugMode
+    var bmp: Bitmap? = builder.bmp
 
     class Builder {
         internal var debugMode: Boolean = BuildConfig.DEBUG
+        internal var bmp: Bitmap? = null
 
         fun setDebugMode(debugMode: Boolean) = apply { this.debugMode = debugMode }
+
+        fun setBitMap(bmp: Bitmap) = apply { this.bmp = bmp }
 
         fun build() = ToolkitConfig(this)
     }

@@ -29,10 +29,10 @@ import okio.Buffer
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
-import java.lang.Exception
 import java.nio.charset.Charset
 import java.util.Base64
 import java.util.concurrent.TimeUnit
+import kotlin.Exception
 
 
 /**
@@ -96,10 +96,21 @@ class ApiRecordInterceptor constructor(callBack: DecryptCallBack) : Interceptor 
                     responseBody = "内容大于2MB不显示";
                 }
             }
+            var title = "";
 
             try {
                 requestBody = call.requestBodyDecrypt(requestBody)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+            try {
                 responseBody = call.responseBodyDecrypt(responseBody)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+
+            try {
+                title = call.getTitle(request.url().toString())
             }catch (e:Exception){
                 e.printStackTrace()
             }
@@ -120,6 +131,7 @@ class ApiRecordInterceptor constructor(callBack: DecryptCallBack) : Interceptor 
             val bean = ApiRecordBean(
                 url = request.url().toString(),
                 method = request.method(),
+                title = title,
                 headers = headerJson.toString(),
                 request = requestBody,
                 response = responseBody,

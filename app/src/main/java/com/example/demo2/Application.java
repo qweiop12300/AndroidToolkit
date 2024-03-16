@@ -1,5 +1,7 @@
 package com.example.demo2;
 
+import android.graphics.BitmapFactory;
+
 import com.william.toolkit.ToolkitPanel;
 import com.william.toolkit.bean.ToolkitConfig;
 
@@ -12,7 +14,9 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ToolkitConfig config = new ToolkitConfig.Builder().setDebugMode(true).build();
+        ToolkitConfig config = new ToolkitConfig.Builder().setDebugMode(true)
+                .setBitMap(BitmapFactory.decodeResource(getResources(), com.william.toolkit.R.drawable.toolkit_icon))
+                .build();
         // init toolkit
         ToolkitPanel.init(this, config);
     }

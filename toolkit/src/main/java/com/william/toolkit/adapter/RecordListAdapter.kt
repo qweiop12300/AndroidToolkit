@@ -42,7 +42,8 @@ class RecordListAdapter(activity: Activity) : BaseAdapter<ApiRecordBean>(activit
         holder.setText(R.id.tv_tool_icon, text)
             .setText(R.id.tv_tool_id, "Id: ${bean.id}")
             .setText(R.id.tv_tool_time, "Time: ${bean.requestTime.toDateStr()}")
-            .setText(R.id.tv_tool_url, "Url: ${bean.url}")
+            .setText(R.id.tv_tool_url, "${bean.url}")
+            .setText(R.id.tv_tool_title,"${bean.title}")
     }
 
 }

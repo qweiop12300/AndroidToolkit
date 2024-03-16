@@ -38,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
         ToolkitPanel.showFloating(this,null);
 
         okHttpClient = new OkHttpClient.Builder().addInterceptor(new ApiRecordInterceptor(new DecryptCallBack() {
+
+            @Override
+            public String getTitle(String url) {
+                return "你好";
+            }
+
             @Override
             public String responseBodyDecrypt(String par) {
                 try {
@@ -56,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public String requestBodyDecrypt(String body) {
-                Log.d("test111",body);
+                if (body==null){
+                    return "";
+                }
                 return body;
             }
         })).build();

@@ -45,9 +45,15 @@ class RecordDetailActivity : BaseActivity() {
     }
 
     private fun initView() {
+        val title: String? = intent.getStringExtra("title")
+
         mViewBinding.includeTitle.apply {
             ivPrevious.setOnClickListener { onBackPressed() }
-            tvToolTitle.setText(R.string.tool_title_record_detail)
+            if (title==null){
+                tvToolTitle.setText(R.string.tool_title_record_detail)
+            }else{
+                tvToolTitle.setText(title)
+            }
             ivToolRight.setImageResource(R.drawable.toolkit_share)
             ivToolRight.setOnClickListener {
                 val text = mViewBinding.tvToolContent.text.toString().trim { it <= ' ' }

@@ -6,6 +6,8 @@ package com.william.toolkit.net;
  * Description:
  */
 public interface DecryptCallBack {
+    public String getTitle(String url);
     public String responseBodyDecrypt(String body);
     public String requestBodyDecrypt(String body);
+
 }

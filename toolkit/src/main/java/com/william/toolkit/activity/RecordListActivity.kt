@@ -112,6 +112,7 @@ class RecordListActivity : BaseActivity() {
                 ) {
                     openActivity<RecordDetailActivity>(this@RecordListActivity) {
                         putExtra("id", bean?.id)
+                        putExtra("title",bean?.title)
                     }
                 }
             })
